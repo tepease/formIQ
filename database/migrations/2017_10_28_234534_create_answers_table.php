@@ -15,7 +15,7 @@ class CreateAnswersTable extends Migration
     {
         Schema::create('answers', function (Blueprint $table) {
             $table->increments('id');
-            $table->foreign('question_id')->references->('id')->on('questions');
+            $table->foreign('question_id')->references('id')->on('questions');
             $table->jsonb('content');
             $table->timestamps();
         });
