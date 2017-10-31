@@ -14,6 +14,4 @@ class Form extends Model
     protected $fillable = [
         'anonymous'
     ];
-    
-    
 }
