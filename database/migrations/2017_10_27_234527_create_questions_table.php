@@ -20,10 +20,11 @@ class CreateQuestionsTable extends Migration
             $table->jsonb('content');
             $table->integer('sequence');
             $table->timestamps();
-        });
 
-        Schema::table('questions', function (Blueprint $table) {
-            $table->foreign('form_id')->references('id')->on('forms')->onDelete('cascade');
+            $table->foreign('form_id')
+                ->references('id')
+                ->on('forms')
+                ->onDelete('cascade');
         });
     }
 
