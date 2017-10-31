@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>formiq</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -82,8 +82,14 @@
                     formiq
                 </div>
 
+                <div>
+                    json schema quiz and survey api
+                </div>
+
                 <div class="links">
-                    <a href="https://github.com/tepease/formiq">GitHub</a>
+                    <a href="https://github.com/tepease/formiq">github</a>
+                    <a href="">implementation</a>
+                    <a href="http://json-schema.org/">json-schema</a>
                 </div>
             </div>
         </div>
