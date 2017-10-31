@@ -1,9 +1,27 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
-    "license": "MIT",
+    "name": "tepease/formiq",
+    "description": "A json-schema quiz and survey api",
+    "keywords": [
+        "formiq",
+        "json-schema",
+        "json-form",
+        "quiz",
+        "survey"
+    ],
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Tristan Pease",
+            "email": "tristan.e.pease@gmail.com"
+        }
+    ],
     "type": "project",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:tepease/formiq.git"
+        }
+    ],
     "require": {
         "php": ">=7.0.0",
         "fideloper/proxy": "~3.3",
