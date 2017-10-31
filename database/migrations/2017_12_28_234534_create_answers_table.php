@@ -18,10 +18,11 @@ class CreateAnswersTable extends Migration
             $table->integer('question_id')->unsigned();
             $table->jsonb('content');
             $table->timestamps();
-        });
 
-        Schema::table('answers', function (Blueprint $table) {
-            $table->foreign('question_id')->references('id')->on('questions');
+            $table->foreign('question_id')
+                ->references('id')
+                ->on('questions')
+                ->onDelete('cascade');
         });
     }
 
