@@ -4,38 +4,44 @@
 
 Route::post('/users', 'UserController@store');
 
-Route::get('/users/{userId}', 'UserController@show');
+Route::get('/users/create', 'UserController@create');
 
-Route::patch('/users/{userId}', 'UserController@update');
+Route::get('/users/{user}', 'UserController@show');
+
+Route::patch('/users/{user}', 'UserController@update');
 
 // form management
 
-Route::post('/forms', 'FormConstroller@store');
+Route::post('/forms', 'FormController@store');
 
-Route::get('/forms/{formId}', 'FormController@show');
+Route::get('/forms/create', 'FormController@create');
 
-Route::patch('/forms/{formId}', 'FormController@update');
+Route::get('/forms/{form}', 'FormController@show');
 
-Route::get('/forms/{formId}/questions', 'QuestionController@index');
+Route::patch('/forms/{form}', 'FormController@update');
 
-Route::post('/forms/{formId}/questions', 'QuestionController@store');
+Route::get('/questions/create', 'QuestionController@create');
 
-Route::get('/forms/{formId}/questions/{questionId}', 'QuestionController@show');
+Route::get('/forms/{form}/questions', 'QuestionController@index');
 
-Route::patch('/forms/{formId}/questions/{questionId}', 'QuestionController@update');
+Route::post('/forms/{form}/questions', 'QuestionController@store');
+
+Route::get('/forms/{form}/questions/{question}', 'QuestionController@show');
+
+Route::patch('/forms/{form}/questions/{question}', 'QuestionController@update');
 
 // interaction reporting
 
-Route::get('/users/{userId}/forms', 'Users/FormController@index');
+Route::get('/users/{user}/forms', 'Users/FormController@index');
 
-Route::get('/users/{userId}/forms/{formId}', 'Users/FormController@show');
+Route::get('/users/{user}/forms/{form}', 'Users/FormController@show');
 
-Route::get('/users/{userId}/forms/{formId}/sessions', 'SessionController@index');
+Route::get('/users/{user}/forms/{form}/sessions', 'SessionController@index');
 
-Route::get('/users/{userId}/forms/{formId}/sessions/{sessionId}', 'SessionController@show');
+Route::get('/users/{user}/forms/{form}/sessions/{sessionId}', 'SessionController@show');
 
-Route::get('/users/{userId}/forms/{formId}/report/{type}', 'Users/FormController@report');
+Route::get('/users/{user}/forms/{form}/report/{type}', 'Users/FormController@report');
 
-Route::get('/users/{userId}/forms/{formId}/answers', 'AnswerController@index');
+Route::get('/users/{user}/forms/{form}/answers', 'AnswerController@index');
 
-Route::get('/users/{userId}/forms/{formId}/answers/{type}', 'AnswerController@show');
+Route::get('/users/{user}/forms/{form}/answers/{type}', 'AnswerController@show');
