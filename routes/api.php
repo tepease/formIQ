@@ -14,11 +14,13 @@ Route::patch('/users/{user}', 'UserController@update');
 
 Route::post('/forms', 'FormController@store');
 
-Route::get('/forms/create', 'FormController@create');
-
 Route::get('/forms/{form}', 'FormController@show');
 
+Route::get('/forms/create', 'FormController@create');
+
 Route::patch('/forms/{form}', 'FormController@update');
+
+Route::delete('/forms/{form}', 'FormController@delete');
 
 Route::get('/questions/create', 'QuestionController@create');
 

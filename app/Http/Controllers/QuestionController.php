@@ -6,23 +6,11 @@ use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
-    public function index()
+    public function create()
     {
-
-    }
-
-    public function store()
-    {
-
-    }
-
-    public function show()
-    {
-
-    }
-
-    public function update()
-    {
-
+        return [
+            'example' => 'of',
+            'question' => 'data'
+        ];
     }
 }

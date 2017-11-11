@@ -13,7 +13,7 @@ class UserController extends Controller
 
     public function store()
     {
-
+        new \App\User;
     }
 
     public function update()
