@@ -4,6 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Form
+ *
+ * @mixin \Eloquent
+ */
 class Form extends Model
 {
     /**
