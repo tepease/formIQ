@@ -3,7 +3,10 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -40,14 +43,57 @@ class Handler extends ExceptionHandler
     }
 
     /**
+     * Routes exceptions to API or HTTP handlers
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param Exception $exception
+     * @return \Illuminate\Http\JsonResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function render($request, Exception $exception)
+    {
+        switch (true) {
+            case $exception instanceof ModelNotFoundException:
+                $exception = new ModelNotFoundException('Record not found', 404);
+                break;
+            case $exception instanceof NotFoundHttpException:
+                $exception = new NotFoundHttpException('Page not found', 404);
+                break;
+            case $exception instanceof MethodNotAllowedHttpException:
+
+        }
+
+        return $request->is('api/*') ?
+            $this->renderJson($request, $exception) :
+            $this->renderHttp($request, $exception);
+    }
+
+    /**
      * Render an exception into an HTTP response.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Exception  $exception
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function render($request, Exception $exception)
+    public function renderHttp($request, Exception $exception)
     {
         return parent::render($request, $exception);
+    }
+
+    /**
+     * Render an exception into a JSON response.
+     *
+     * @param $request
+     * @param Exception $exception
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function renderJson($request, Exception $exception)
+    {
+        return response()->json([
+            'error' => [
+                'code' => $exception->getCode(),
+                'message' => $exception->getMessage(),
+            ],
+            'request' => compact('request'),
+        ]);
     }
 }
