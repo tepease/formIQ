@@ -81,7 +81,6 @@ class Handler extends ExceptionHandler
     {
         return response()->json([
             'error' => [
-                'code' => $exception->getCode(),
                 'message' => $exception->getMessage(),
             ],
             'request' => [
@@ -89,7 +88,7 @@ class Handler extends ExceptionHandler
                 'path' => $request->path(),
                 'body' => $request->getContent(),
             ]
-        ]);
+        ], $exception->getCode());
     }
 
     /**
