@@ -51,16 +51,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        switch (true) {
-            case $exception instanceof ModelNotFoundException:
-                $exception = new ModelNotFoundException('Record not found', 404);
-                break;
-            case $exception instanceof NotFoundHttpException:
-                $exception = new NotFoundHttpException('Page not found', 404);
-                break;
-            case $exception instanceof MethodNotAllowedHttpException:
-
-        }
+        $exception = $this->parseException($exception);
 
         return $request->is('api/*') ?
             $this->renderJson($request, $exception) :
@@ -82,7 +73,7 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into a JSON response.
      *
-     * @param $request
+     * @param \Illuminate\Http\Request $request
      * @param Exception $exception
      * @return \Illuminate\Http\JsonResponse
      */
@@ -93,7 +84,31 @@ class Handler extends ExceptionHandler
                 'code' => $exception->getCode(),
                 'message' => $exception->getMessage(),
             ],
-            'request' => compact('request'),
+            'request' => [
+                'method' => $request->method(),
+                'path' => $request->path(),
+                'body' => $request->getContent(),
+            ]
         ]);
+    }
+
+    /**
+     * Obfuscates exception types and returns useful generic messages and codes
+     *
+     * @param $exception
+     * @return Exception
+     */
+    public function parseException($exception)
+    {
+        switch (true) {
+            case $exception instanceof ModelNotFoundException:
+            case $exception instanceof NotFoundHttpException:
+                $exception = new Exception("Sorry, I can't find what you're looking for...", 404);
+                break;
+            case $exception instanceof MethodNotAllowedHttpException:
+                $exception = new Exception("Sorry, I don't have that method", 404);
+        }
+
+        return $exception;
     }
 }

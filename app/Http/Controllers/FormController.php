@@ -13,15 +13,7 @@ class FormController extends Controller
 
     public function show($id)
     {
-        $form = Form::find($id);
-        if (!$form) {
-            return response()->json([
-                'error' => [
-                    'message' => "Form {$id} not found!",
-                    'code' => 404
-                ]
-            ]);
-        }
+        $form = Form::findOrFail($id);
         return response()->json([
             'data' => $form->toArray()
         ], 200);
