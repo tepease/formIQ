@@ -1,8 +1,9 @@
 <?php
 
+use App\Form;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class FormSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,7 +12,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(UserSeeder::class);
-        $this->call(FormSeeder::class);
+        foreach(range(1, 10) as $i)
+        {
+            Form::create(['anonymous' => $i % 2]);
+        }
     }
 }

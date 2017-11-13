@@ -11,5 +11,13 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Session extends Model
 {
-    //
+    public function user()
+    {
+        return $this->belongsTo('User');
+    }
+
+    public function form()
+    {
+        return $this->belongsTo('Form');
+    }
 }

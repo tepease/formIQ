@@ -17,6 +17,7 @@ class CreateFormsTable extends Migration
             $table->increments('id');
             $table->boolean('anonymous');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

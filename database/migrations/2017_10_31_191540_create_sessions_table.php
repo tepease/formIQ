@@ -19,8 +19,14 @@ class CreateSessionsTable extends Migration
             $table->integer('form_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('form_id')->references('id')->on('forms')->onDelete('cascade');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+            $table->foreign('form_id')
+                ->references('id')
+                ->on('forms')
+                ->onDelete('cascade');
         });
     }
 

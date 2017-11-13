@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use InvalidArgumentException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
@@ -51,7 +52,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        $exception = $this->parseException($exception);
+        $exception = $this->translate($request, $exception);
 
         return $request->is('api/*') ?
             $this->renderJson($request, $exception) :
@@ -94,10 +95,11 @@ class Handler extends ExceptionHandler
     /**
      * Obfuscates exception types and returns useful generic messages and codes
      *
+     * @param \Illuminate\Http\Request $request
      * @param $exception
      * @return Exception
      */
-    public function parseException($exception)
+    public function translate($request, $exception)
     {
         switch (true) {
             case $exception instanceof ModelNotFoundException:
@@ -105,7 +107,12 @@ class Handler extends ExceptionHandler
                 $exception = new Exception("Sorry, I can't find what you're looking for...", 404);
                 break;
             case $exception instanceof MethodNotAllowedHttpException:
-                $exception = new Exception("Sorry, I don't have that method", 404);
+                $exception = new Exception("Sorry, I don't have that method", 405);
+                break;
+            case $exception instanceof InvalidArgumentException:
+                $exception = new Exception("Invalid arguments for this request. GET " .
+                    $request->getUri() . "/create for more detail.", 400);
+                break;
         }
 
         return $exception;

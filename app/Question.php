@@ -28,4 +28,17 @@ class Question extends Model
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function form()
+    {
+        return $this->belongsTo('Form');
+    }
+
+    /*
+     * TODO
+     */
+    public function answer()
+    {
+
+    }
 }

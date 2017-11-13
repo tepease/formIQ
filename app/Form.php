@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Form
@@ -11,6 +12,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Form extends Model
 {
+    use SoftDeletes;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -19,4 +22,9 @@ class Form extends Model
     protected $fillable = [
         'anonymous'
     ];
+
+    protected function questions()
+    {
+        return $this->hasMany('Question');
+    }
 }

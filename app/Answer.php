@@ -28,4 +28,14 @@ class Answer extends Model
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function session()
+    {
+        return $this->belongsTo('Session');
+    }
+
+    public function question()
+    {
+        return $this->belongsTo('Question');
+    }
 }

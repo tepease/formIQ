@@ -22,7 +22,6 @@ class FormController extends Controller
     public function update($id)
     {
         $form = Form::findOrFail($id);
-        if (!$form) throw new \HttpException(404);
         $form->update(request()->all());
         return response()->json([
             'data' => $form->toArray()

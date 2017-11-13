@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Hash;
+use App\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -13,7 +15,8 @@ class UserController extends Controller
 
     public function store()
     {
-        new \App\User;
+        request()->password = Hash::make(request()->password);
+        return User::create(request()->all());
     }
 
     public function update()
