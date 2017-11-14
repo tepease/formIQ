@@ -29,16 +29,19 @@ class Question extends Model
         'password', 'remember_token',
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function form()
     {
         return $this->belongsTo('Form');
     }
 
-    /*
-     * TODO
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function answer()
     {
-
+        return $this->belongsToMany('Answer');
     }
 }

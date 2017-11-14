@@ -6,6 +6,11 @@ use App\Form;
 
 class FormController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth.basic', ['only' => 'store']);
+    }
+
     public function store()
     {
         return Form::create(request()->all());
@@ -14,6 +19,7 @@ class FormController extends Controller
     public function show($id)
     {
         $form = Form::findOrFail($id);
+
         return response()->json([
             'data' => $form->toArray()
         ], 200);
@@ -23,6 +29,7 @@ class FormController extends Controller
     {
         $form = Form::findOrFail($id);
         $form->update(request()->all());
+
         return response()->json([
             'data' => $form->toArray()
         ], 200);
@@ -32,6 +39,7 @@ class FormController extends Controller
     {
         $form = Form::findOrFail($id);
         $form->delete();
+
         return response()->json([], 204);
     }
 

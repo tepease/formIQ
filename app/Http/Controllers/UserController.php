@@ -15,8 +15,11 @@ class UserController extends Controller
 
     public function store()
     {
-        request()->password = Hash::make(request()->password);
-        return User::create(request()->all());
+        return User::create([
+            'name' => request()->name,
+            'email' => request()->email,
+            'password' => Hash::make(request()->password)
+        ]);
     }
 
     public function update()
