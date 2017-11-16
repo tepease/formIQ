@@ -2,9 +2,9 @@
 
 // user management
 
-Route::post('/users', 'UserController@store');
+Route::get('/users', 'UserController@create');
 
-Route::get('/users/create', 'UserController@create');
+Route::post('/users', 'UserController@store');
 
 Route::get('/users/{user}', 'UserController@show');
 
@@ -12,17 +12,17 @@ Route::patch('/users/{user}', 'UserController@update');
 
 // form management
 
+Route::get('/forms', 'FormController@create');
+
 Route::post('/forms', 'FormController@store');
 
 Route::get('/forms/{form}', 'FormController@show');
-
-Route::get('/forms/create', 'FormController@create');
 
 Route::patch('/forms/{form}', 'FormController@update');
 
 Route::delete('/forms/{form}', 'FormController@delete');
 
-Route::get('/questions/create', 'QuestionController@create');
+Route::get('/questions', 'QuestionController@create');
 
 Route::get('/questions/schema', 'QuestionController@schema');
 
@@ -38,7 +38,7 @@ Route::patch('/forms/{form}/questions/{question}', 'QuestionController@update');
 
 Route::get('/users/{user}/forms', 'Users/FormController@index');
 
-Route::get('/users/{user}/forms/{form}', 'Users/FormController@show');
+Route::get('/users/{user}/forms/{form}', 'Users/QuestionController@index');
 
 Route::get('/users/{user}/forms/{form}/sessions', 'SessionController@index');
 
