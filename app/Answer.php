@@ -31,11 +31,11 @@ class Answer extends Model
 
     public function session()
     {
-        return $this->belongsTo('Session');
+        return $this->belongsTo('App\Session');
     }
 
     public function question()
     {
-        return $this->belongsTo('Question');
+        return $this->belongsTo('App\Question');
     }
 }

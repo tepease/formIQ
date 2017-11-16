@@ -13,11 +13,11 @@ class Session extends Model
 {
     public function user()
     {
-        return $this->belongsTo('User');
+        return $this->belongsTo('App\User');
     }
 
     public function form()
     {
-        return $this->belongsTo('Form');
+        return $this->belongsTo('App\Form');
     }
 }

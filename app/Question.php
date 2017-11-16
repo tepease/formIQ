@@ -42,6 +42,6 @@ class Question extends Model
      */
     public function answer()
     {
-        return $this->belongsToMany('Answer');
+        return $this->belongsToMany('App\Answer');
     }
 }

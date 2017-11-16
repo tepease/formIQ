@@ -25,6 +25,6 @@ class Form extends Model
 
     protected function questions()
     {
-        return $this->hasMany('Question');
+        return $this->hasMany('App\Question');
     }
 }
