@@ -24,6 +24,8 @@ Route::delete('/forms/{form}', 'FormController@delete');
 
 Route::get('/questions/create', 'QuestionController@create');
 
+Route::get('/questions/schema', 'QuestionController@schema');
+
 Route::get('/forms/{form}/questions', 'QuestionController@index');
 
 Route::post('/forms/{form}/questions', 'QuestionController@store');

@@ -45,10 +45,6 @@ class FormController extends Controller
 
     public function create()
     {
-        return response()->json([
-            'data' => [
-                'anonymous' => 'boolean'
-            ]
-        ], 200);
+        return Form::schema();
     }
 }

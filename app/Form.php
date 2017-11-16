@@ -27,4 +27,11 @@ class Form extends Model
     {
         return $this->hasMany('App\Question');
     }
+
+    public static function schema()
+    {
+        return [
+            'anonymous' => 'boolean'
+        ];
+    }
 }

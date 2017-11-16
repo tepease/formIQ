@@ -50,9 +50,11 @@ class QuestionController extends Controller
 
     public function create()
     {
-        return [
-            'example' => 'of',
-            'question' => 'data'
-        ];
+        return Question::schema();
+    }
+
+    public function schema()
+    {
+        return Question::contentSchema();
     }
 }
