@@ -1,5 +1,7 @@
 <?php
 
+use App\Form;
+use App\Question;
 use Faker\Generator as Faker;
 
 /*
@@ -13,63 +15,92 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\Question::class, 'radio-mcq', function (Faker $faker) {
+$factory->defineAs(Question::class, 'radio-mcq', function (Faker $faker) {
+    $max = $faker->numberBetween(2, 6);
+    $opt = [];
+
+    foreach (range(0, $max) as $i) {
+        $opt[$faker->word] = 0;
+    }
+
+    $opt[$faker->numberBetween(0, $max)] = 1;
+
     return [
+        'form_id' => $faker->randomElement(Form::pluck('id')->all()),
+        'sequence' => 0,
+        'updated_by' => 0,
         'type' => 'radio',
-        'prompt' => $faker->sentence(10, true) . '?',
-        'weight' => $faker->numberBetween(1, 5),
-        'shuffle' => $faker->boolean,
-        'opt' => [
-            $faker->name => 0,
-            $faker->name => 0,
-            $faker->name => 0,
-            $faker->name => 1
-        ]
+        'content' => json_encode([
+            'prompt' => $faker->sentence(10, true) . '?',
+            'weight' => $faker->numberBetween(1, 5),
+            'shuffle' => $faker->boolean,
+            'opt' => $opt
+        ])
     ];
 });
 
-$factory->define(App\Question::class, 'tick-mcq', function (Faker $faker) {
+$factory->defineAs(Question::class, 'tick-mcq', function (Faker $faker) {
+    $opt = [];
+    foreach (range(0, $faker->numberBetween(2, 6)) as $i) {
+        $opt[$faker->word] = $faker->boolean;
+    }
+
     return [
+        'form_id' => $faker->randomElement(Form::pluck('id')->all()),
+        'sequence' => 0,
+        'updated_by' => 0,
         'type' => 'tick',
-        'prompt' => $faker->sentence(10, true) . '?',
-        'weight' => $faker->numberBetween(1, 5),
-        'shuffle' => $faker->boolean,
-        'scoring' => $faker->randomElement(['any', 'all']),
-        'opt' => [
-            $faker->word => $faker->boolean,
-            $faker->word => $faker->boolean,
-            $faker->word => $faker->boolean,
-            $faker->word => $faker->boolean
-        ]
+        'content' => json_encode([
+            'prompt' => $faker->sentence(10, true) . '?',
+            'weight' => $faker->numberBetween(1, 5),
+            'shuffle' => $faker->boolean,
+            'scoring' => $faker->randomElement(['any', 'all']),
+            'opt' => $opt
+        ])
     ];
 });
 
-$factory->define(App\Question::class, 'radio-survey', function (Faker $faker) {
+$factory->defineAs(Question::class, 'radio-survey', function (Faker $faker) {
+    $opt = [];
+    foreach (range(0, $faker->numberBetween(2, 6)) as $i) {
+        $opt[$faker->word] = 0;
+    }
+
     return [
+        'form_id' => $faker->randomElement(Form::pluck('id')->all()),
+        'sequence' => 0,
+        'updated_by' => 0,
         'type' => 'radio',
-        'prompt' => $faker->sentence(10, true) . '?',
-        'weight' => 0,
-        'shuffle' => $faker->boolean,
-        'opt' => [
-            $faker->word => 0,
-            $faker->word => 0,
-            $faker->word => 0,
-            $faker->word => 0
-        ]
+        'content' => json_encode([
+            'prompt' => $faker->sentence(10, true) . '?',
+            'weight' => 0,
+            'shuffle' => $faker->boolean,
+            'opt' => $opt
+        ])
     ];
 });
 
-$factory->define(App\Question::class, 'context', function (Faker $faker) {
+$factory->defineAs(Question::class, 'context', function (Faker $faker) {
     return [
+        'form_id' => $faker->randomElement(Form::pluck('id')->all()),
+        'sequence' => 0,
+        'updated_by' => 0,
         'type' => 'context',
-        'text' => $faker->sentence
+        'content' => json_encode([
+            'text' => $faker->sentence
+        ])
     ];
 });
 
-$factory->define(App\Question::class, 'text', function (Faker $faker) {
+$factory->defineAs(Question::class, 'text', function (Faker $faker) {
     return [
+        'form_id' => $faker->randomElement(Form::pluck('id')->all()),
+        'sequence' => 0,
+        'updated_by' => 0,
         'type' => 'text',
-        'prompt' => $faker->sentence,
-        'weight' => $faker->numberBetween(1, 5)
+        'content' => json_encode([
+            'prompt' => $faker->sentence,
+            'weight' => $faker->numberBetween(1, 5)
+        ])
     ];
 });

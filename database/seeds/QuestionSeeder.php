@@ -1,6 +1,5 @@
 <?php
 
-use App\Form;
 use App\Question;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
@@ -14,19 +13,19 @@ class QuestionSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create();
+        $types = [
+            'radio-mcq',
+            'tick-mcq',
+            'radio-survey',
+            'context',
+            'text'
+        ];
 
-        $formIds = Form::pluck('id')->all();
+        $faker = Faker::create();
 
         foreach(range(1, 50) as $i)
         {
-            Question::create([
-                'form_id' => $faker->randomElement($formIds),
-                'updated_by' => 0,
-                'content' => json_encode([
-                    $faker->word => $faker->word
-                ])
-            ]);
+            factory(Question::class, $faker->randomElement($types))->create();
         }
     }
 }
