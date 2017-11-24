@@ -18,7 +18,7 @@ class CreateQuestionsTable extends Migration
             $table->integer('form_id')->unsigned();
             $table->bigInteger('updated_by');
             $table->text('type');
-            $table->jsonb('content');
+            $table->jsonb('attr');
             $table->integer('sequence')->nullable();
             $table->timestamps();
 

@@ -7,9 +7,16 @@ use App\Question;
 
 class QuestionController extends Controller
 {
-    public function store()
+    public function store($id)
     {
-        return Question::create(request()->all());
+        return response()->json(
+            Question::create([
+                'form_id' => $id,
+                'type' => request()->type,
+                'attr' => request()->attr,
+                'sequence' => request()->sequence,
+                'updated_by' => 0
+            ]), 200);
     }
 
     public function index($id)
