@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Form;
+use App\Question;
 
 class FormController extends Controller
 {
@@ -13,7 +14,21 @@ class FormController extends Controller
 
     public function store()
     {
-        return Form::create(request()->all());
+        $form = Form::create(request()->all());
+
+        foreach (json_decode(request()->questions) as $key => $question) {
+            Question::create([
+                'form_id' => $form->id,
+                'sequence' => $key,
+                'type' => $question->type,
+                'attr' => json_encode($question->attr),
+                'updated_by' => 0
+            ]);
+        }
+
+        return response()->json([
+            'data' => $form->toArray()
+        ], 200);
     }
 
     public function show($id)
