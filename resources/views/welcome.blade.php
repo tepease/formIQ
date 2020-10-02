@@ -49,6 +49,10 @@
                 font-size: 84px;
             }
 
+            .links {
+                margin-top: 30px;
+            }
+
             .links > a {
                 color: #636b6f;
                 padding: 0 25px;
@@ -60,7 +64,7 @@
             }
 
             .m-b-md {
-                margin-bottom: 30px;
+                margin-bottom: 0px;
             }
         </style>
     </head>
